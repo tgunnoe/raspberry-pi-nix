@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     u-boot-src = {
       flake = false;
       url = "https://ftp.denx.de/pub/u-boot/u-boot-2024.07.tar.bz2";
@@ -51,6 +52,9 @@
         system = "aarch64-linux";
         overlays = with self.overlays; [ core libcamera ];
       };
+      unstable = import srcs.nixpkgs-unstable {
+        system = "aarch64-linux";
+      };
     in
     {
       overlays = {
@@ -68,6 +72,7 @@
       nixosConfigurations = {
         rpi-example = srcs.nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
+	  specialArgs = { inherit unstable; };
           modules = [ self.nixosModules.raspberry-pi self.nixosModules.sd-image ./example ];
         };
       };
