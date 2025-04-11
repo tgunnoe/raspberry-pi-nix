@@ -21,7 +21,7 @@
     ];
   };
   networking = {
-    hostName = "jacurutu";
+    hostName = "sietch-tabr";
     useDHCP = false;
     interfaces = {
       wlan0.useDHCP = true;
@@ -46,7 +46,7 @@
   ];
   };
   raspberry-pi-nix = {
-    board = "bcm2712";
+    board = "bcm2711";
     libcamera-overlay.enable = false;
   };
   hardware = {
@@ -55,7 +55,7 @@
     #opengl.driSupport = true;
     raspberry-pi = {
       config = {
-        pi5 = {
+        pi4 = {
           options = {
             arm_boost = {
               enable = true;
@@ -123,6 +123,10 @@
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "tgunnoe";
+  };
 
 
   environment.systemPackages = with pkgs; [
@@ -135,7 +139,7 @@
     superTuxKart
     dosbox-x
     scummvm
-    unstable.fex
+    #unstable.fex
     kdePackages.kturtle
     tuxtype
     tuxpaint
@@ -151,6 +155,7 @@
     commandergenius
     #zeroad
     # zeroad-data
+    unstable.luanti
 
     thonny #Pythone IDE
     codeblocks

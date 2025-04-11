@@ -70,10 +70,15 @@
         sd-image = import ./sd-image;
       };
       nixosConfigurations = {
-        rpi-example = srcs.nixpkgs.lib.nixosSystem {
+        jacurutu = srcs.nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
 	  specialArgs = { inherit unstable; };
-          modules = [ self.nixosModules.raspberry-pi self.nixosModules.sd-image ./example ];
+          modules = [ self.nixosModules.raspberry-pi self.nixosModules.sd-image ./example/jacurutu.nix ];
+        };
+        sietch-tabr = srcs.nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { inherit unstable; };
+          modules = [ self.nixosModules.raspberry-pi self.nixosModules.sd-image ./example/sietch-tabr.nix ];
         };
       };
       checks.aarch64-linux = self.packages.aarch64-linux;
